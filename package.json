@@ -1,0 +1,28 @@
+{
+  "$ref": "/definitions/variables",
+  "name": "monorepo-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"./packages/{backend,web}\" dev",
+    "dev:backend": "pnpm --filter @app/backend dev",
+    "dev:web": "pnpm --filter @app/web dev",
+    "dev:mobile": "pnpm --filter @app/mobile dev",
+    
+    "build": "pnpm --filter @app/shared build && pnpm --filter \"./packages/{backend,web}\" build",
+    "build:shared": "pnpm --filter @app/shared build",
+    
+    "clean": "pnpm --recursive exec rm -rf node_modules dist .next .expo",
+    "install:all": "pnpm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "prettier": "^3.2.4"
+  }
+}

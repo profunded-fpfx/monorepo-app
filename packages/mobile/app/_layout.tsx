@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import SpaceMonoFont from '../assets/fonts/SpaceMono-Regular.ttf';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -24,7 +25,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: SpaceMonoFont,
     ...FontAwesome.font,
   });
 
@@ -68,7 +69,7 @@ function RootLayoutNav() {
       // Usuario autenticado está en login/signup -> redirigir a tabs
       router.replace('/(tabs)');
     }
-  }, [user, segments, isLoading]);
+  }, [user, segments, isLoading, router]);
 
   if (isLoading) {
     return null; // O un componente de loading

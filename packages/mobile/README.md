@@ -62,16 +62,19 @@ npm run web
 ## 🔐 Flujo de Autenticación
 
 ### Sin autenticar
+
 ```
 Usuario abre app → Login/Signup (sin tabs)
 ```
 
 ### Autenticado
+
 ```
 Usuario se loguea → Tabs (Home, Explorar, Perfil)
 ```
 
 ### Logout
+
 ```
 Usuario hace logout → Regresa a Login
 ```
@@ -114,9 +117,9 @@ const login = async (email: string, password: string) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
-  
+
   const data = await response.json();
-  
+
   await AsyncStorage.setItem('user', JSON.stringify(data.user));
   await AsyncStorage.setItem('token', data.token);
   setUser(data.user);
@@ -129,9 +132,9 @@ const signup = async (email: string, password: string, name?: string) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password, name }),
   });
-  
+
   const data = await response.json();
-  
+
   await AsyncStorage.setItem('user', JSON.stringify(data.user));
   await AsyncStorage.setItem('token', data.token);
   setUser(data.user);
@@ -153,7 +156,7 @@ export default {
   },
   dark: {
     // ...
-  }
+  },
 };
 ```
 
@@ -175,18 +178,21 @@ export default {
 ## 📱 Pantallas disponibles
 
 ### Login (`app/(auth)/login.tsx`)
+
 - Email y password
 - Validación de campos
 - Navegación a signup
 - Loading state
 
 ### Signup (`app/(auth)/signup.tsx`)
+
 - Nombre, email, password, confirmar password
 - Validaciones
 - Navegación a login
 - Loading state
 
 ### Perfil (`app/(tabs)/profile.tsx`)
+
 - Avatar con inicial del usuario
 - Información del usuario
 - Opciones de configuración
@@ -220,6 +226,7 @@ npx eas build --platform ios
 ## 🚨 Troubleshooting
 
 ### Error: No se puede iniciar la app
+
 ```bash
 # Limpiar cache y reinstalar
 rm -rf node_modules
@@ -228,12 +235,14 @@ npm start --clear
 ```
 
 ### Error: AsyncStorage no funciona
+
 ```bash
 # Reinstalar AsyncStorage
 npm install @react-native-async-storage/async-storage
 ```
 
 ### Error: Expo Go no conecta
+
 - Asegúrate de estar en la misma red WiFi
 - Reinicia Expo Go
 - Reinicia el servidor: `npm start --clear`

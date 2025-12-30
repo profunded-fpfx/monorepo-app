@@ -30,7 +30,7 @@ export default function LoginScreen() {
     try {
       await login(email, password);
       // La navegación se maneja automáticamente en el root layout
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'Credenciales inválidas');
     } finally {
       setIsLoading(false);

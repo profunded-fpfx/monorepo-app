@@ -42,7 +42,7 @@ export default function SignupScreen() {
     try {
       await signup(email, password, name);
       // La navegación se maneja automáticamente en el root layout
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'No se pudo crear la cuenta');
     } finally {
       setIsLoading(false);

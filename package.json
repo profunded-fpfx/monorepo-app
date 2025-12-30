@@ -9,12 +9,25 @@
     "dev:backend": "pnpm --filter @app/backend dev",
     "dev:web": "pnpm --filter @app/web dev",
     "dev:mobile": "pnpm --filter @app/mobile dev",
-    
+    "lint": "pnpm -r --parallel lint",
+    "lint:fix": "pnpm -r --parallel lint:fix",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,js,jsx,json,md}\" \"*.{json,md}\"",
+    "format:check": "prettier --check \"packages/**/*.{ts,tsx,js,jsx,json,md}\" \"*.{json,md}\"",
+    "typecheck": "pnpm --filter \"!@profunded/mobile\" -r typecheck",
+    "test": "pnpm -r --filter \"!@profunded/mobile\" test",
+    "test:backend": "pnpm --filter @profunded/backend test",
+    "test:web": "pnpm --filter @profunded/web test",
     "build": "pnpm --filter @app/shared build && pnpm --filter \"./packages/{backend,web}\" build",
     "build:shared": "pnpm --filter @app/shared build",
-    
     "clean": "pnpm --recursive exec rm -rf node_modules dist .next .expo",
-    "install:all": "pnpm install"
+    "install:all": "pnpm install",
+    "validate": "pnpm validate:install && pnpm validate:lint && pnpm validate:format && pnpm validate:typecheck && pnpm validate:test && pnpm validate:build",
+    "validate:install": "pnpm install --frozen-lockfile",
+    "validate:lint": "pnpm lint",
+    "validate:format": "pnpm format:check",
+    "validate:typecheck": "pnpm typecheck",
+    "validate:test": "pnpm test -- --passWithNoTests",
+    "validate:build": "pnpm build"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +35,8 @@
   "packageManager": "pnpm@10.13.1",
   "devDependencies": {
     "@types/node": "^20.11.0",
-    "typescript": "^5.3.3",
-    "prettier": "^3.2.4"
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "typescript": "^5.3.3"
   }
 }

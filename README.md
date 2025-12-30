@@ -32,12 +32,14 @@ monorepo-app/
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd monorepo-app
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
@@ -57,21 +59,27 @@ pnpm dev
 ### Running Individual Packages
 
 #### Backend
+
 ```bash
 pnpm --filter backend dev
 ```
+
 The API will be available at `http://localhost:3000`
 
 #### Web
+
 ```bash
 pnpm --filter web dev
 ```
+
 The web app will be available at `http://localhost:3001`
 
 #### Mobile
+
 ```bash
 pnpm --filter mobile start
 ```
+
 Follow Expo CLI instructions to run on iOS/Android simulator or physical device.
 
 ## 📦 Package Management
@@ -95,11 +103,13 @@ pnpm add -w <package-name>
 ## 🧪 Testing
 
 Run tests for all packages:
+
 ```bash
 pnpm test
 ```
 
 Run tests for a specific package:
+
 ```bash
 pnpm --filter backend test
 pnpm --filter web test
@@ -109,11 +119,13 @@ pnpm --filter mobile test
 ## 🏗️ Building
 
 Build all packages:
+
 ```bash
 pnpm build
 ```
 
 Build a specific package:
+
 ```bash
 pnpm --filter backend build
 pnpm --filter web build
@@ -129,6 +141,7 @@ pnpm lint
 ```
 
 Fix linting issues automatically:
+
 ```bash
 pnpm lint:fix
 ```
@@ -146,11 +159,13 @@ Each package has its own configuration files:
 The mobile app uses Expo. For more details, see [packages/mobile/README.md](packages/mobile/README.md).
 
 ### Running on iOS
+
 ```bash
 pnpm --filter mobile ios
 ```
 
 ### Running on Android
+
 ```bash
 pnpm --filter mobile android
 ```

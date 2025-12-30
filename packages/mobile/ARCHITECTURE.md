@@ -37,8 +37,8 @@ Maneja todo el estado de autenticación:
 
 ```typescript
 interface AuthContextType {
-  user: User | null;           // Usuario actual
-  isLoading: boolean;          // Estado de carga
+  user: User | null; // Usuario actual
+  isLoading: boolean; // Estado de carga
   login: (email, pass) => Promise<void>;
   signup: (email, pass, name?) => Promise<void>;
   logout: () => Promise<void>;
@@ -239,7 +239,7 @@ export const authAPI = {
     });
     return response.json();
   },
-  
+
   signup: async (email: string, password: string, name: string) => {
     const response = await fetch(`${API_URL}/auth/signup`, {
       method: 'POST',
@@ -256,10 +256,10 @@ export const authAPI = {
 ```typescript
 const login = async (email: string, password: string) => {
   const data = await authAPI.login(email, password);
-  
+
   await AsyncStorage.setItem('user', JSON.stringify(data.user));
   await AsyncStorage.setItem('token', data.token);
-  
+
   setUser(data.user);
 };
 ```
@@ -270,7 +270,7 @@ const login = async (email: string, password: string) => {
 // services/api.ts
 export const authenticatedFetch = async (url: string, options: RequestInit = {}) => {
   const token = await AsyncStorage.getItem('token');
-  
+
   return fetch(url, {
     ...options,
     headers: {

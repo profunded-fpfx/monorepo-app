@@ -6,29 +6,23 @@ export default function ProfileScreen() {
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    Alert.alert(
-      'Cerrar Sesión',
-      '¿Estás seguro que quieres cerrar sesión?',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Cerrar Sesión',
-          style: 'destructive',
-          onPress: async () => {
-            await logout();
-          },
+    Alert.alert('Cerrar Sesión', '¿Estás seguro que quieres cerrar sesión?', [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Cerrar Sesión',
+        style: 'destructive',
+        onPress: async () => {
+          await logout();
         },
-      ]
-    );
+      },
+    ]);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.avatar}>
-          <Text style={styles.avatarText}>
-            {user?.name?.charAt(0).toUpperCase() || 'U'}
-          </Text>
+          <Text style={styles.avatarText}>{user?.name?.charAt(0).toUpperCase() || 'U'}</Text>
         </View>
         <Text style={styles.name}>{user?.name || 'Usuario'}</Text>
         <Text style={styles.email}>{user?.email}</Text>
@@ -38,15 +32,15 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.option}>
           <Text style={styles.optionText}>Editar Perfil</Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity style={styles.option}>
           <Text style={styles.optionText}>Configuración</Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity style={styles.option}>
           <Text style={styles.optionText}>Privacidad</Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity style={styles.option}>
           <Text style={styles.optionText}>Ayuda</Text>
         </TouchableOpacity>

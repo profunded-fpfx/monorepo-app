@@ -39,9 +39,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string) => {
     try {
-      // TODO: Reemplazar con tu llamada a la API
+      // TODO: Reemplazar con tu llamada a la API -- , password: string
       // const response = await fetch('YOUR_API_URL/auth/login', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },

@@ -1,0 +1,37 @@
+# Build outputs
+dist
+build
+
+# Dependencies
+node_modules
+
+# Coverage
+coverage
+*.lcov
+
+# Cache
+.eslintcache
+.cache
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+
+# Misc
+*.min.js
+*.min.css

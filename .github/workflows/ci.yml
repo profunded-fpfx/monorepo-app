@@ -151,32 +151,54 @@ jobs:
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
-          debug: true
           payload: |
             {
               "text": "Build Result for PR #${{ github.event.pull_request.number }}",
               "blocks": [
                 {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "${{ needs.lint-and-format.result == 'success' && needs.test-backend.result == 'success' && needs.test-web.result == 'success' && needs.build.result == 'success' && '✅ Build Passed' || '❌ Build Failed' }}"
+                  }
+                },
+                {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Build Result for PR #${{ github.event.pull_request.number }}*\n${{ github.event.pull_request.title }}"
+                    "text": "*PR #${{ github.event.pull_request.number }}:* ${{ github.event.pull_request.title }}\n_by @${{ github.event.pull_request.user.login }}_"
                   }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "🌿 `${{ github.head_ref }}` → `${{ github.base_ref }}` | 📝 ${{ github.event.pull_request.commits }} commit(s) | 📊 +${{ github.event.pull_request.additions }} -${{ github.event.pull_request.deletions }} lines"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
                 },
                 {
                   "type": "section",
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Lint:*\n${{ needs.lint-and-format.result == 'success' && '✅' || '❌' }}"
+                      "text": "*Lint & Format*\n${{ needs.lint-and-format.result == 'success' && '✅ Passed' || '❌ Failed' }}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*Tests:*\n${{ needs.test-backend.result == 'success' && needs.test-web.result == 'success' && '✅' || '❌' }}"
+                      "text": "*Backend Tests*\n${{ needs.test-backend.result == 'success' && '✅ Passed' || '❌ Failed' }}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*Build:*\n${{ needs.build.result == 'success' && '✅' || '❌' }}"
+                      "text": "*Web Tests*\n${{ needs.test-web.result == 'success' && '✅ Passed' || '❌ Failed' }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Build*\n${{ needs.build.result == 'success' && '✅ Passed' || '❌ Failed' }}"
                     }
                   ]
                 },
@@ -189,7 +211,25 @@ jobs:
                         "type": "plain_text",
                         "text": "View PR"
                       },
-                      "url": "${{ github.event.pull_request.html_url }}"
+                      "url": "${{ github.event.pull_request.html_url }}",
+                      "style": "primary"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Workflow"
+                      },
+                      "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "Run #${{ github.run_number }} • Commit <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>"
                     }
                   ]
                 }

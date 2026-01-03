@@ -69,10 +69,10 @@ docker-compose down -v
 
 ## Servicios y Puertos
 
-| Servicio | Puerto | URL                      |
-|----------|--------|--------------------------|
-| Web      | 3000   | http://localhost:3000    |
-| Backend  | 4000   | http://localhost:4000    |
+| Servicio | Puerto | URL                   |
+| -------- | ------ | --------------------- |
+| Web      | 3000   | http://localhost:3000 |
+| Backend  | 4000   | http://localhost:4000 |
 
 ## Construir Imágenes Individuales
 
@@ -127,6 +127,7 @@ Los health checks se ejecutan cada 30 segundos.
 ### Multi-stage Builds
 
 Los Dockerfiles usan builds multi-etapa para:
+
 - Reducir el tamaño de las imágenes finales
 - Separar dependencias de desarrollo y producción
 - Mejorar la seguridad
@@ -138,6 +139,7 @@ Las dependencias se instalan antes de copiar el código fuente para aprovechar l
 ### Usuario no-root
 
 Ambas imágenes ejecutan la aplicación con un usuario no privilegiado por seguridad:
+
 - Backend: `nestjs` (UID 1001)
 - Web: `nextjs` (UID 1001)
 

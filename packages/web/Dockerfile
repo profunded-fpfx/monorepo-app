@@ -51,14 +51,12 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Copy necessary files
-COPY --from=builder /app/packages/web/next.config.ts ./
-COPY --from=builder /app/packages/web/package.json ./
-COPY --from=builder /app/packages/web/public ./public
-
-# Copy built application
+# Copy standalone output (includes all dependencies)
 COPY --from=builder --chown=nextjs:nodejs /app/packages/web/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/packages/web/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/packages/web/.next/static ./packages/web/.next/static
+
+# Copy public assets to the correct location in standalone mode
+COPY --from=builder --chown=nextjs:nodejs /app/packages/web/public ./packages/web/public
 
 # Switch to non-root user
 USER nextjs
@@ -70,5 +68,5 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
-# Start the application
-CMD ["node", "server.js"]
+# Start the application - server.js is in packages/web in standalone mode
+CMD ["node", "packages/web/server.js"]
